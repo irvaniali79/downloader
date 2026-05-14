@@ -1,0 +1,27 @@
+name: Download and commit file
+
+on:
+  workflow_dispatch:  # اجرای دستی از تب Actions
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # اجازه push کردن
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create data directory if not exists
+        run: mkdir -p data
+
+      - name: Download file
+        run: curl -L -o data/composer.phar "https://github.com/composer/composer/releases/download/2.9.8/composer.phar"
+        # آدرس بالا را با لینک فایل خود جایگزین کنید.
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Update downloaded file'
+          file_pattern: 'data/composer.phar'
