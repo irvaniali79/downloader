@@ -17,11 +17,11 @@ jobs:
         run: mkdir -p data
 
       - name: Download file
-        run: curl -L -o data/composer.phar "https://github.com/composer/composer/releases/download/2.9.8/composer.phar"
+        run: curl -L -o data/get-pip.py "https://bootstrap.pypa.io/get-pip.py"
         # آدرس بالا را با لینک فایل خود جایگزین کنید.
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Update downloaded file'
-          file_pattern: 'data/composer.phar'
+          file_pattern: 'data/get-pip.py'
